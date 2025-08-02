@@ -50,5 +50,5 @@ A professional web application for searching case information from Indian judici
 - **Custom CSS** - Court-themed styling
 - **Vanilla JavaScript** - Form validation and UX enhancements
 
-## 📁 Project Structure
+
 
