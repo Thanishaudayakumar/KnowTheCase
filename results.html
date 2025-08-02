@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}Case Search Results - Indian Court Case Lookup Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <!-- Search Summary -->
+        <div class="card court-card mb-4">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-search me-2"></i>
+                    Search Results
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>Case Type:</strong><br>
+                        <span class="badge bg-primary">{{ query.case_type }}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <strong>Case Number:</strong><br>
+                        <code>{{ query.case_number }}</code>
+                    </div>
+                    <div class="col-md-3">
+                        <strong>Filing Year:</strong><br>
+                        {{ query.filing_year }}
+                    </div>
+                    <div class="col-md-3">
+                        <strong>Search Time:</strong><br>
+                        <small>{{ query.query_timestamp.strftime('%d %b %Y, %I:%M %p') }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if success and result %}
+            <!-- Case Details Found -->
+            <div class="card court-card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Case Information Found
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="case-detail-group">
+                                <h6 class="detail-label">
+                                    <i class="fas fa-user me-2"></i>Petitioner/Plaintiff
+                                </h6>
+                                <p class="detail-value">{{ result.petitioner_name or 'Not available' }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="case-detail-group">
+                                <h6 class="detail-label">
+                                    <i class="fas fa-user-tie me-2"></i>Respondent/Defendant
+                                </h6>
+                                <p class="detail-value">{{ result.respondent_name or 'Not available' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="case-detail-group">
+                                <h6 class="detail-label">
+                                    <i class="fas fa-calendar-plus me-2"></i>Filing Date
+                                </h6>
+                                <p class="detail-value">
+                                    {% if result.filing_date %}
+                                        {{ result.filing_date.strftime('%d %B %Y') }}
+                                    {% else %}
+                                        Not available
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="case-detail-group">
+                                <h6 class="detail-label">
+                                    <i class="fas fa-calendar-check me-2"></i>Next Hearing
+                                </h6>
+                                <p class="detail-value">
+                                    {% if result.next_hearing_date %}
+                                        {{ result.next_hearing_date.strftime('%d %B %Y') }}
+                                    {% else %}
+                                        Not scheduled
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="case-detail-group">
+                                <h6 class="detail-label">
+                                    <i class="fas fa-info-circle me-2"></i>Case Status
+                                </h6>
+                                <p class="detail-value">
+                                    <span class="badge bg-info">{{ result.case_status or 'Pending' }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if result.judge_name %}
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="case-detail-group">
+                                <h6 class="detail-label">
+                                    <i class="fas fa-gavel me-2"></i>Presiding Judge
+                                </h6>
+                                <p class="detail-value">{{ result.judge_name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if result.pdf_links and result.pdf_links != '[]' %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="case-detail-group">
+                                <h6 class="detail-label">
+                                    <i class="fas fa-file-pdf me-2"></i>Court Documents
+                                </h6>
+                                <div class="document-links">
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-download me-2"></i>Download Order/Judgment
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        {% else %}
+            <!-- No Results or Error -->
+            <div class="card court-card">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Search Unsuccessful
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info" role="alert">
+                        <h6 class="alert-heading">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Court Website Access Status
+                        </h6>
+                        <p class="mb-2">{{ error or query.error_message }}</p>
+                        <hr>
+                        <p class="mb-0 small">
+                            <strong>Note:</strong> This is a demonstration of the court case lookup interface. 
+                            Real implementation would require:
+                        </p>
+                        <ul class="small mb-0 mt-2">
+                            <li>Official authorization from court administration</li>
+                            <li>CAPTCHA solving mechanisms</li>
+                            <li>Session management for court portals</li>
+                            <li>Compliance with court data access policies</li>
+                        </ul>
+                    </div>
+
+                    <div class="possible-actions">
+                        <h6>Suggested Actions:</h6>
+                        <ul>
+                            <li>Verify the case number format is correct</li>
+                            <li>Check if the filing year is accurate</li>
+                            <li>Ensure the case type matches the actual case</li>
+                            <li>Try searching directly on the court's official website</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- Action Buttons -->
+        <div class="text-center mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">
+                <i class="fas fa-search me-2"></i>
+                New Search
+            </a>
+            <a href="{{ url_for('query_history') }}" class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-history me-2"></i>
+                View Search History
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

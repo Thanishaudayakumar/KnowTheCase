@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- Header Section -->
+        <div class="text-center mb-5">
+            <div class="court-seal-placeholder mb-3">
+                <i class="fas fa-university fa-3x text-primary"></i>
+            </div>
+            <h1 class="court-title">Indian Court Case Lookup Portal</h1>
+            <p class="lead text-muted">Search for case information from Indian judicial databases</p>
+        </div>
+
+        <!-- Case Search Form -->
+        <div class="card court-card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-search me-2"></i>
+                    Case Information Search
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('search_case') }}" id="caseSearchForm">
+                    <div class="row">
+                        <!-- Case Type -->
+                        <div class="col-md-6 mb-3">
+                            <label for="case_type" class="form-label required">Case Type</label>
+                            <select class="form-select" id="case_type" name="case_type" required>
+                                <option value="">Select Case Type</option>
+                                <option value="CS">Civil Suit (CS)</option>
+                                <option value="CRL">Criminal Case (CRL)</option>
+                                <option value="WP">Writ Petition (WP)</option>
+                                <option value="LPA">Letters Patent Appeal (LPA)</option>
+                                <option value="CMA">Civil Miscellaneous Appeal (CMA)</option>
+                                <option value="CMP">Civil Miscellaneous Petition (CMP)</option>
+                                <option value="FAO">First Appeal from Order (FAO)</option>
+                                <option value="MAC">Motor Accident Claims (MAC)</option>
+                                <option value="RFA">Regular First Appeal (RFA)</option>
+                                <option value="RSA">Regular Second Appeal (RSA)</option>
+                            </select>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Select the type of case you want to search
+                            </div>
+                        </div>
+
+                        <!-- Filing Year -->
+                        <div class="col-md-6 mb-3">
+                            <label for="filing_year" class="form-label required">Filing Year</label>
+                            <select class="form-select" id="filing_year" name="filing_year" required>
+                                <option value="">Select Year</option>
+                                {% for year in range(2024, 1949, -1) %}
+                                    <option value="{{ year }}">{{ year }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">
+                                <i class="fas fa-calendar me-1"></i>
+                                Year when the case was filed
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Number -->
+                    <div class="mb-4">
+                        <label for="case_number" class="form-label required">Case Number</label>
+                        <input type="text" class="form-control" id="case_number" name="case_number" 
+                               placeholder="e.g., 1234, ABC/1234, 1234/2024" required>
+                        <div class="form-text">
+                            <i class="fas fa-hashtag me-1"></i>
+                            Enter the case registration number (without case type or year prefix)
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-search">
+                            <i class="fas fa-search me-2"></i>
+                            Search Case
+                        </button>
+                        <button type="reset" class="btn btn-outline-secondary ms-2">
+                            <i class="fas fa-undo me-2"></i>
+                            Clear Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Information Panel -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="info-card">
+                    <div class="info-header">
+                        <i class="fas fa-info-circle text-info"></i>
+                        <h6>Search Information</h6>
+                    </div>
+                    <ul class="info-list">
+                        <li>Case searches are performed on official court databases</li>
+                        <li>Results include party names, dates, and document links</li>
+                        <li>Search history is maintained for reference</li>
+                        <li>All queries are logged for audit purposes</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="info-card">
+                    <div class="info-header">
+                        <i class="fas fa-shield-alt text-success"></i>
+                        <h6>Privacy & Security</h6>
+                    </div>
+                    <ul class="info-list">
+                        <li>Searches are conducted securely and confidentially</li>
+                        <li>No personal information is stored beyond query logs</li>
+                        <li>Data transmission is encrypted</li>
+                        <li>Compliant with court data access policies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Form validation
+    const form = document.getElementById('caseSearchForm');
+    const caseNumberInput = document.getElementById('case_number');
+    
+    form.addEventListener('submit', function(e) {
+        const caseNumber = caseNumberInput.value.trim();
+        if (caseNumber.length < 1) {
+            e.preventDefault();
+            alert('Please enter a valid case number');
+            caseNumberInput.focus();
+        }
+    });
+
+    // Auto-format case number input
+    caseNumberInput.addEventListener('input', function(e) {
+        let value = e.target.value.toUpperCase();
+        // Remove invalid characters for case numbers
+        value = value.replace(/[^A-Z0-9\/\-]/g, '');
+        e.target.value = value;
+    });
+});
+</script>
+{% endblock %}

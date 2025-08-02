@@ -1,0 +1,403 @@
+/* Court Theme CSS - Professional Legal Interface */
+
+:root {
+    --court-primary: #1A237E;
+    --court-secondary: #F5F5F5;
+    --court-accent: #ECEFF1;
+    --court-success: #2E7D32;
+    --court-warning: #F57C00;
+    --court-danger: #C62828;
+    --court-info: #1976D2;
+    --court-dark: #212529;
+    --court-light: #FFFFFF;
+    --court-shadow: 0 2px 10px rgba(26, 35, 126, 0.1);
+    --court-border: #E0E0E0;
+}
+
+/* Typography */
+body {
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--court-secondary);
+    color: var(--court-dark);
+    line-height: 1.6;
+}
+
+.court-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    color: var(--court-primary);
+    margin-bottom: 0.5rem;
+}
+
+.navbar-brand {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    color: var(--court-primary);
+}
+
+/* Navigation */
+.court-navbar {
+    background: linear-gradient(135deg, var(--court-primary) 0%, #283593 100%);
+    box-shadow: var(--court-shadow);
+    padding: 1rem 0;
+}
+
+.court-navbar .navbar-brand {
+    color: var(--court-light) !important;
+    font-size: 1.5rem;
+}
+
+.court-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.court-navbar .nav-link:hover {
+    color: var(--court-light) !important;
+}
+
+/* Main Content */
+.main-content {
+    min-height: calc(100vh - 200px);
+    padding-bottom: 2rem;
+}
+
+/* Cards */
+.court-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--court-shadow);
+    background: var(--court-light);
+    margin-bottom: 1.5rem;
+}
+
+.court-card .card-header {
+    background: linear-gradient(135deg, var(--court-primary) 0%, #283593 100%);
+    color: var(--court-light);
+    border-radius: 12px 12px 0 0 !important;
+    padding: 1.25rem 1.5rem;
+    border: none;
+}
+
+.court-card .card-body {
+    padding: 2rem 1.5rem;
+}
+
+.court-card .card-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+/* Form Elements */
+.form-label {
+    font-weight: 600;
+    color: var(--court-primary);
+    margin-bottom: 0.5rem;
+}
+
+.form-label.required::after {
+    content: ' *';
+    color: var(--court-danger);
+}
+
+.form-control, .form-select {
+    border: 2px solid var(--court-border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--court-primary);
+    box-shadow: 0 0 0 0.2rem rgba(26, 35, 126, 0.15);
+}
+
+.form-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+/* Buttons */
+.btn-search {
+    background: linear-gradient(135deg, var(--court-primary) 0%, #283593 100%);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 35, 126, 0.4);
+}
+
+.btn-primary {
+    background-color: var(--court-primary);
+    border-color: var(--court-primary);
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #0d47a1;
+    border-color: #0d47a1;
+}
+
+.btn-outline-secondary {
+    color: var(--court-primary);
+    border-color: var(--court-primary);
+    font-weight: 500;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--court-primary);
+    border-color: var(--court-primary);
+}
+
+/* Court Seal Placeholder */
+.court-seal-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--court-accent) 0%, #CFD8DC 100%);
+    border-radius: 50%;
+    border: 4px solid var(--court-primary);
+}
+
+/* Information Cards */
+.info-card {
+    background: var(--court-light);
+    border: 1px solid var(--court-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    height: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.info-header i {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+}
+
+.info-header h6 {
+    margin: 0;
+    font-weight: 600;
+    color: var(--court-primary);
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--court-accent);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--court-success);
+    font-weight: bold;
+}
+
+/* Case Details */
+.case-detail-group {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--court-accent);
+    border-radius: 8px;
+    border-left: 4px solid var(--court-primary);
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--court-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.detail-value {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--court-dark);
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* Document Links */
+.document-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Badges */
+.badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+}
+
+/* Alerts */
+.alert {
+    border: none;
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.alert-info {
+    background-color: rgba(25, 118, 210, 0.1);
+    border-left-color: var(--court-info);
+    color: #0d47a1;
+}
+
+.alert-danger {
+    background-color: rgba(198, 40, 40, 0.1);
+    border-left-color: var(--court-danger);
+    color: #b71c1c;
+}
+
+.alert-warning {
+    background-color: rgba(245, 124, 0, 0.1);
+    border-left-color: var(--court-warning);
+    color: #e65100;
+}
+
+.alert-success {
+    background-color: rgba(46, 125, 50, 0.1);
+    border-left-color: var(--court-success);
+    color: #1b5e20;
+}
+
+/* Footer */
+.court-footer {
+    background: linear-gradient(135deg, #37474F 0%, #263238 100%);
+    color: var(--court-light);
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+.court-footer p {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .court-card .card-body {
+        padding: 1.5rem 1rem;
+    }
+    
+    .info-card {
+        margin-bottom: 1rem;
+    }
+    
+    .btn-search {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .case-detail-group {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Loading States */
+.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: var(--court-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Code styling */
+code {
+    background-color: var(--court-accent);
+    color: var(--court-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* Table styling for history views */
+.table {
+    background: var(--court-light);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--court-shadow);
+}
+
+.table th {
+    background: var(--court-primary);
+    color: var(--court-light);
+    font-weight: 600;
+    border: none;
+    padding: 1rem;
+}
+
+.table td {
+    padding: 1rem;
+    border-color: var(--court-accent);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--court-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--court-primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0d47a1;
+}

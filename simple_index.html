@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Court Case Lookup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .court-header { background: #1a237e; color: white; padding: 2rem 0; }
+        .card { border: none; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .btn-primary { background-color: #1a237e; border-color: #1a237e; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="court-header text-center">
+        <h1>🏛️ Court Case Lookup</h1>
+        <p>Search for case information</p>
+    </div>
+
+    <div class="container mt-4">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else 'info' }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Search Form -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4>🔍 Case Search</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="/search">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Case Type *</label>
+                                    <select name="case_type" class="form-select" required>
+                                        <option value="">Select Type</option>
+                                        <option value="WP">Writ Petition (WP)</option>
+                                        <option value="CA">Civil Appeal (CA)</option>
+                                        <option value="CRL">Criminal (CRL)</option>
+                                        <option value="CS">Civil Suit (CS)</option>
+                                        <option value="LPA">Letters Patent Appeal (LPA)</option>
+                                        <option value="CMA">Civil Misc Appeal (CMA)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Filing Year *</label>
+                                    <select name="filing_year" class="form-select" required>
+                                        <option value="">Select Year</option>
+                                        {% for year in range(2024, 1999, -1) %}
+                                            <option value="{{ year }}">{{ year }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Case Number *</label>
+                                <input type="text" name="case_number" class="form-control" 
+                                       placeholder="e.g., 1234 or ABC/1234" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    🔍 Search Case
+                                </button>
+                                <a href="/cases" class="btn btn-outline-info btn-lg ms-2">
+                                    📚 Available Cases
+                                </a>
+                                <a href="/history" class="btn btn-outline-secondary btn-lg ms-2">
+                                    📋 View History
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h6>ℹ️ How to Search</h6>
+                        <ul class="small">
+                            <li>Select the case type from dropdown</li>
+                            <li>Choose the year case was filed</li>
+                            <li>Enter case number (numbers/letters)</li>
+                            <li>Click search to find case details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h6>🔒 Privacy Notice</h6>
+                        <ul class="small">
+                            <li>Searches are logged for reference</li>
+                            <li>No personal data is stored</li>
+                            <li>This is a demonstration portal</li>
+                            <li>Real court sites require authorization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
